@@ -8,7 +8,20 @@ function inFourteenDays() {
 }
 
 const MutationResolver = {
+  // TODO ÜBUNG 2 ("RESOLVER"): füge den updateTaskState-Mutation-Resolver hinzu
+  //   - Lies die übergebenen Argumente (taskId und newState)
+  //   - Du kannst db.updateTaskState verwenden, um den Task zu speichern
+  //     - Die Methode liefert den gespeicherten Task zurück, den
+  //       Du so unverändert aus deinem Resolver zurückgeben kannst
+
+  // ----- UEBUNG 3: -----------------------------
+
   async addTask(_s, { projectId, input }) {
+    // TODO ÜBUNG 3 ("CONTEXT"):
+    //   füge den Context-Parameter hinzu
+    //   lies den currentUser aus
+    //   - wenn kein currentUser wirf ein Error ("nur für angemeldete Benutzer erlaubt")
+    //   - wenn currentUser.id nicht der assigneeId aus dem input, wirf ebenfalls einen Fehler
     input.toBeFinishedAt = input.toBeFinishedAt || inFourteenDays();
 
     const user = await userService.getUser(input.assigneeId);
@@ -19,12 +32,6 @@ const MutationResolver = {
     const newTask = await db.addTaskToProject(projectId, input);
 
     return newTask;
-  },
-
-  async updateTaskState(_s, { taskId, newState }) {
-    const updatedTasks = await db.updateTaskState(taskId, newState);
-
-    return updatedTasks;
   },
 };
 

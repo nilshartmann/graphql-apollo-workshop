@@ -1,19 +1,38 @@
 const { ApolloServer } = require("apollo-server");
 const responseCachePlugin = require("apollo-server-plugin-response-cache");
 
+const auth = require("./domain/auth");
+
 const typeDefs = require("./schema");
 
 const resolvers = {
   Query: require("./resolvers/query"),
   Mutation: require("./resolvers/mutation"),
-  Project: require("./resolvers/project"),
+
+  // TODO "ÜBUNG RESOLVER":
+  //       Projekt- Resolver hinzufügen,
+  //       wenn Du den Resolver implementiert hast
+  // Project: require("./resolvers/project"),
   Task: require("./resolvers/task"),
 };
+
+async function buildContext() {
+  // TODO "ÜBUNG CONTEXT"
+  //  - Lies den req-Parameter aus,
+  //  - Lies den Token aus den HTTP Headern (req.headers.token)
+  //  - Falls ein Token gefunden vorhanden sit, übergib den Token
+  //    der auth-Funktion, die ein Promise mit einem User (oder null)
+  //    zurückgibt
+  //  - setz den user als 'currentUser' in das Context-Objekt und
+  //  - liefer den Kontext zurück
+}
 
 const server = new ApolloServer({
   typeDefs,
 
   resolvers,
+
+  context: buildContext(),
 
   formatError: (err) => {
     console.error(err.originalError || err);

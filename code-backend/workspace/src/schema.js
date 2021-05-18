@@ -1,75 +1,38 @@
+// TODO 1: --------------------------------------------------------------------------
+//
+// Füge den Type 'Project' zum Schema hinzu
+//
+// FELDER:
+// id (ID)
+// title, description: jeweils strings
+// owner: Referenz auf den User-Type
+// category: Referenz auf den Category-Type
+// tasks: Liste mit Task-Objekten
+// task: Erwartet ein Argument (id) und liefert einen optionales Task-Objekt zurück
+//
+// Alle Felder sind *Pflicht*-Felder, dh dürfen kein null zurückgeben (bis auf 'task' Feld)
+
+// TODO 2: --------------------------------------------------------------------------
+//
+// Füge die Felder 'project' und 'projects' am Query-Type hinzu (s.u.)
+// Füge das Feld 'updateTaskState' am Mutation-Type hinzu (s.u.)
+// ---------------------------------------------------------------------------------
+//
+// Du kannst das Schema jederzeit im GraphQL Playground (http://localhost:4000)
+// kontrollieren.
+// HINWEIS: Das AUSFÜHREN der Queries wird noch nicht funktionieren, aber im Doc Explorer
+//          des Playgrounds sollen die neuen Typen und Felder zu sehen sein.
+
 const { gql } = require("apollo-server");
 
 module.exports = gql`
-  """
-  A User describes an actor in the system
-  """
   type User {
     id: ID!
-
-    """
-    The login is used by the user to log in to our System
-    """
     login: String!
-
-    """
-    The human readable name of the person
-    """
     name: String!
-
-    """
-    For Debugging: a unique "id" that is generate inside the Userservice for each request
-    Having this id one can verify if a resource comes from the apollo cache
-    (that is requestId does not change) or if it's actually (re-)fetched from the service
-    """
     requestId: String!
   }
 
-  """
-  A **Project** is the central entity in our system.
-
-  It is owned by a **User**
-  and have 0..n **Tasks** assigned to it. Projects can be grouped by a **Category**
-  to make management easier.
-  """
-  type Project {
-    id: ID!
-
-    """
-    A a simple, concise title for your project
-    """
-    title: String!
-
-    """
-    A description of this project in deep detail so others can
-    unterstand the goals and constraints of this project.
-    """
-    description: String!
-
-    """
-    The project owner
-    """
-    owner: User!
-
-    category: Category!
-
-    """
-    You split your Project into several tasks that you
-    # have to work on to finish this Project's goal
-    """
-    tasks: [Task!]!
-
-    """
-    Get a task by it's unique id. Return null if that
-    task could not be found
-    """
-    task(id: ID!): Task
-  }
-
-  """
-  Projects are grouped into user-defined categories
-  (like 'Private', 'Business', 'Hobby',...)
-  """
   type Category {
     id: ID!
     name: String!
@@ -81,79 +44,43 @@ module.exports = gql`
     FINISHED
   }
 
-  """
-  A Task is part of a Project. It represents an actual
-  task of a Tasks that needs to be fulfilled
-  to complete the Project
-  """
   type Task {
     id: ID!
-
-    """
-    A concicse title of this task, that describes what to do
-    """
     title: String!
-
-    """
-    A complete and detailed description what should be done in this task.
-    The description should be understandable also by people that are not
-    familiar with this task, so they can get into without having
-    to ask for further details
-    """
     description: String!
     state: TaskState!
-
-    """
-    Who works on this Task or should work on the task
-    """
     assignee: User!
-
-    """
-    Deadline for this task
-    """
     toBeFinishedAt: String!
   }
 
   type Query {
-    """
-    Returns hello world when the server is running
-    """
-    ping: String! @cacheControl(maxAge: 5)
+    ping: String!
     users: [User!]!
     user(id: ID!): User
 
-    """
-    Return an unordered list of all projects
-    """
-    projects: [Project!]!
-
-    project(id: ID!): Project
+    # TODO 2:
+    # Ergänze zwei Felder im Query-Type:
+    # 'projects', der eine Liste mit Projekten zurückliefert
+    # 'project', das ein einzelnes Projekt (optional) zurückliefert.
+    #            Dieses Feld benötigt die id des gesuchten Projektes
+    #            als (Pflicht-)Feld
   }
 
   input AddTaskInput {
     title: String!
     description: String!
-
-    """
-     The date when this task should be finished.
-
-    If the date is not specified, it's automatically set to
-    14 days from now
-    """
     toBeFinishedAt: String
     assigneeId: ID!
   }
 
   type Mutation {
-    """
-    Create a new Task. Returns the task just created, populated with
-    its server-side generated ID
-    """
     addTask(projectId: ID!, input: AddTaskInput!): Task!
 
-    """
-    Change the state of the specified task
-    """
-    updateTaskState(taskId: ID!, newState: TaskState!): Task!
+    # TODO 3:
+    # Füge die 'updateTaskState' Mutation hinzu,
+    # sie erwartet zwei Argumente:
+    #    taskId (Pflicht)
+    #    newState (Pflicht)
+    # Sie liefert ein Task-Objekt zurück (Pflicht)
   }
 `;
