@@ -1,4 +1,5 @@
 const db = require("../domain/db");
+const userService = require("../domain/userservice");
 
 function inFourteenDays() {
   const toBeFinishedAt = new Date();
@@ -7,10 +8,21 @@ function inFourteenDays() {
 }
 
 const MutationResolver = {
-  async addTask(_s, { projectId, input }, { currentUser, dataSources }) {
+  // TODO ÜBUNG 2 ("RESOLVER"): füge den updateTaskState-Mutation-Resolver hinzu
+  //   - Lies die übergebenen Argumente (taskId und newState)
+  //   - Du kannst db.updateTaskState verwenden, um den Task zu speichern
+  //     - Die Methode liefert den gespeicherten Task zurück, den
+  //       Du so unverändert aus deinem Resolver zurückgeben kannst
+  async updateTaskState(_s, { taskId, newState }) {
+    const updatedTasks = await db.updateTaskState(taskId, newState);
+
+    return updatedTasks;
+  },
+  // ----- UEBUNG 3: -----------------------------
+  async addTask(_s, { projectId, input }, { currentUser }) {
     input.toBeFinishedAt = input.toBeFinishedAt || inFourteenDays();
 
-    const user = await dataSources.userDataSource.getUser(input.assigneeId);
+    const user = await userService.getUser(input.assigneeId);
     if (!user) {
       return {
         code: "1",
@@ -35,12 +47,6 @@ const MutationResolver = {
     const newTask = await db.addTaskToProject(projectId, input);
 
     return { newTask };
-  },
-
-  async updateTaskState(_s, { taskId, newState }) {
-    const updatedTasks = await db.updateTaskState(taskId, newState);
-
-    return updatedTasks;
   },
 };
 

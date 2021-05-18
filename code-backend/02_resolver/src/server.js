@@ -12,7 +12,7 @@ const resolvers = {
   // TODO "ÜBUNG RESOLVER":
   //       Projekt- Resolver hinzufügen,
   //       wenn Du den Resolver implementiert hast
-  // Project: require("./resolvers/project"),
+  Project: require("./resolvers/project"),
   Task: require("./resolvers/task"),
 };
 
@@ -32,7 +32,7 @@ const server = new ApolloServer({
 
   resolvers,
 
-  context: buildContext,
+  context: buildContext(),
 
   formatError: (err) => {
     console.error(err.originalError || err);

@@ -12,11 +12,11 @@ const resolvers = {
   // TODO "ÜBUNG RESOLVER":
   //       Projekt- Resolver hinzufügen,
   //       wenn Du den Resolver implementiert hast
-  // Project: require("./resolvers/project"),
+  Project: require("./resolvers/project"),
   Task: require("./resolvers/task"),
 };
 
-async function buildContext() {
+async function buildContext({ req }) {
   // TODO "ÜBUNG CONTEXT"
   //  - Lies den req-Parameter aus,
   //  - Lies den Token aus den HTTP Headern (req.headers.token)
@@ -25,6 +25,13 @@ async function buildContext() {
   //    zurückgibt
   //  - setz den user als 'currentUser' in das Context-Objekt und
   //  - liefer den Kontext zurück
+  const token = req.headers.token;
+  if (token) {
+    const user = await auth(token);
+    if (user) {
+      return { currentUser: user };
+    }
+  }
 }
 
 const server = new ApolloServer({

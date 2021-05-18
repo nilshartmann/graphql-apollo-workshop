@@ -32,7 +32,7 @@ const server = new ApolloServer({
 
   resolvers,
 
-  context: buildContext,
+  context: buildContext(),
 
   formatError: (err) => {
     console.error(err.originalError || err);
