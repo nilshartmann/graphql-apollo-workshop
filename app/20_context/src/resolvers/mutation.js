@@ -1,4 +1,5 @@
 const db = require("../domain/db");
+const userService = require("../domain/userservice");
 
 function inFourteenDays() {
   const toBeFinishedAt = new Date();
@@ -10,7 +11,7 @@ const MutationResolver = {
   addTask: async (_s, { projectId, input }) => {
     input.toBeFinishedAt = input.toBeFinishedAt || inFourteenDays();
 
-    const user = await db.getUser(input.assigneeId);
+    const user = await userService.getUser(input.assigneeId);
     if (!user) {
       throw new Error(`Unknown assignee with id '${input.assigneeId}'`);
     }

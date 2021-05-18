@@ -110,7 +110,7 @@ class Database {
         ]
       );
 
-      const { newTaskId } = await this.database.get(
+      const { newTaskId } = await db.get(
         "SELECT last_insert_rowid() AS newTaskId"
       );
       return this.getTaskById(newTaskId);

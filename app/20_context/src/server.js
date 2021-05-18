@@ -1,5 +1,4 @@
 const { ApolloServer } = require("apollo-server");
-const auth = require("./domain/auth");
 const responseCachePlugin = require("apollo-server-plugin-response-cache");
 
 const typeDefs = require("./schema");
@@ -15,12 +14,6 @@ const server = new ApolloServer({
   typeDefs,
 
   resolvers,
-
-  context: async ({ req }) => {
-    const token = req.headers.token;
-    const user = await auth(token);
-    return { user };
-  },
 
   formatError: (err) => {
     console.error(err.originalError || err);
