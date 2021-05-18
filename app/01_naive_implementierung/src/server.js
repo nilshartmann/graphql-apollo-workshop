@@ -1,5 +1,5 @@
 const { ApolloServer } = require("apollo-server");
-const auth = require("./db/auth");
+const auth = require("./domain/auth");
 const responseCachePlugin = require("apollo-server-plugin-response-cache");
 
 const typeDefs = require("./schema");

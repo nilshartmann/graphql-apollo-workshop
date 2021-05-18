@@ -1,13 +1,14 @@
-const db = require("../db/db");
-const userService = require("../db/userservice");
-const Query = {
+const db = require("../domain/db");
+const userService = require("../domain/userservice");
+
+const RootQueryResolver = {
   ping: () => `Hello, World @ ${new Date().toLocaleTimeString()}`,
+
   users: () => {
     return userService.listAllUsers();
   },
+
   user: (_s, { id }) => {
-    // here we can be sure that id is not null, as it's defined
-    // as a mandatory field in the graphql schema
     return userService.getUser(id);
   },
 
@@ -20,4 +21,4 @@ const Query = {
   },
 };
 
-module.exports = Query;
+module.exports = RootQueryResolver;

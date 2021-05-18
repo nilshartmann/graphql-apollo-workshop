@@ -14,7 +14,7 @@ function initDatabase(db) {
       }
       console.log("CREATING DATABASE");
       const content = fs.readFileSync(
-        path.resolve("./src/db/init-sqlite.sql"),
+        path.resolve(__dirname, "./init-sqlite.sql"),
         "utf8"
       );
 
@@ -26,7 +26,7 @@ function initDatabase(db) {
 }
 
 function getDbFilename() {
-  const filename = path.resolve("../db.sqlite");
+  const filename = path.resolve("./db.sqlite");
   console.log(`Using SQLite file '${filename}'`);
   return filename;
 }

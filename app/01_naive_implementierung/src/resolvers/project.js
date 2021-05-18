@@ -1,6 +1,7 @@
-const db = require("../db/db");
-const userService = require("../db/userservice");
-module.exports = {
+const db = require("../domain/db");
+const userService = require("../domain/userservice");
+
+const ProjectResolver = {
   owner: (project) => {
     // 1+n Problem when the query asks for more than one project 😱
     //     (more or less solved thx to the fact, that the userDataSource caches)
@@ -25,3 +26,5 @@ module.exports = {
     return db.getTaskById(id);
   },
 };
+
+module.exports = ProjectResolver;

@@ -1,4 +1,5 @@
 const { gql } = require("apollo-server");
+
 module.exports = gql`
   """
   A User describes an actor in the system
@@ -142,17 +143,6 @@ module.exports = gql`
     toBeFinishedAt: String
     assigneeId: ID!
   }
-
-  type AddTaskSuccess {
-    newTask: Task!
-  }
-
-  type AddTaskFailure {
-    errorMessage: String!
-    errorCode: Int!
-  }
-
-  # union AddTaskResponse   AddTaskSuccess | AddTaskFailure
 
   type Mutation {
     """
