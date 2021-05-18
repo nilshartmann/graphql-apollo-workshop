@@ -10,6 +10,7 @@ const resolvers = {
   Mutation: require("./resolvers/mutation"),
   Project: require("./resolvers/project"),
   Task: require("./resolvers/task"),
+  AddTaskResponse: require("./resolvers/add-task-response"),
 };
 
 const server = new ApolloServer({

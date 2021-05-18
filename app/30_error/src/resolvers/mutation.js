@@ -13,22 +13,29 @@ const MutationResolver = {
 
     const user = await userService.getUser(input.assigneeId);
     if (!user) {
-      throw new Error(`Unknown assignee with id '${input.assigneeId}'`);
+      return {
+        code: "1",
+        errorMessage: `Unknown assignee with id '${input.assigneeId}'`,
+      };
     }
 
     if (!currentUser) {
-      throw new Error("No current user!");
+      return {
+        code: "2",
+        errorMessage: "No current user!",
+      };
     }
 
     if (currentUser.id !== input.assigneeId) {
-      throw new Error(
-        `You (${currentUser.id}) can only assign tasks to yourself, but not to user '${input.assigneeId}'`
-      );
+      return {
+        code: "3",
+        errorMessage: `You (${currentUser.id}) can only assign tasks to yourself, but not to user '${input.assigneeId}'`,
+      };
     }
 
     const newTask = await db.addTaskToProject(projectId, input);
 
-    return newTask;
+    return { newTask };
   },
 
   updateTaskState: async (_s, { taskId, newState }) => {

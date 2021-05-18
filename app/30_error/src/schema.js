@@ -149,12 +149,29 @@ module.exports = gql`
     assigneeId: ID!
   }
 
+  "The task has been created successfully"
+  type AddTaskSuccess {
+    "The new created task, populated with its server-side generated ID"
+    newTask: Task!
+  }
+
+  "The Task could not be created"
+  type AddTaskFailure {
+    "Unique error code id"
+    code: Int!
+
+    "Readable error message containing further information"
+    errorMessage: String!
+  }
+
+  "Response for addTask Mutation"
+  union AddTaskResponse = AddTaskSuccess | AddTaskFailure
+
   type Mutation {
     """
-    Create a new Task. Returns the task just created, populated with
-    its server-side generated ID
+    Create a new Task.
     """
-    addTask(projectId: ID!, input: AddTaskInput!): Task!
+    addTask(projectId: ID!, input: AddTaskInput!): AddTaskResponse!
 
     """
     Change the state of the specified task
