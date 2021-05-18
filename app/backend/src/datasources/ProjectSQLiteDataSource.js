@@ -4,12 +4,10 @@ const sqlite = require("sqlite");
 const fs = require("fs");
 const path = require("path");
 
-const { projectFromRow, taskFromRow, taskStateToDb } = require("./mapping");
+const { projectFromRow, taskFromRow, taskStateToDb } = require("../db/mapping");
 
 /**
- * An SQLite-backed DataSource. Does NOT support query "optimization"
- * to eager load complete object graphs (i.e. projects with all tasks)
- * depending on the query
+ * An SQLite-backed DataSource. Does NOT support caching
  */
 class ProjectSQLiteDataSource extends DataSource {
   constructor() {

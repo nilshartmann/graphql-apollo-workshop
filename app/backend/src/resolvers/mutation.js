@@ -1,13 +1,15 @@
+function inFourteenDays() {
+  const toBeFinishedAt = new Date();
+  toBeFinishedAt.setDate(toBeFinishedAt.getDate() + 14);
+  return toBeFinishedAt.toISOString();
+}
+
 module.exports = {
-  addTask: async (_s, { projectId, input }, { dataSources, pubsub }) => {
-    if (!input.toBeFinishedAt) {
-      // set default date if none is specified
-      const toBeFinishedAt = new Date();
-      toBeFinishedAt.setDate(toBeFinishedAt.getDate() + 14);
-      input.toBeFinishedAt = toBeFinishedAt.toISOString();
-    }
+  addTask: async (_s, { projectId, input }, { dataSources, userId }) => {
+    input.toBeFinishedAt = input.toBeFinishedAt || inFourteenDays();
 
     // Make sure specified user exists in userservice
+
     const user = await dataSources.userDataSource.getUser(input.assigneeId);
     if (!user) {
       throw new Error(`Unknown assignee with id '${input.assigneeId}'`);
@@ -17,8 +19,6 @@ module.exports = {
       projectId,
       input
     );
-
-    pubsub.publish("NewTaskEvent", { newTask });
 
     return newTask;
   },
@@ -33,8 +33,6 @@ module.exports = {
       newState
     );
 
-    pubsub.publish("TaskChangedEvent", { task: updatedTasks });
-
     return updatedTasks;
-  }
+  },
 };

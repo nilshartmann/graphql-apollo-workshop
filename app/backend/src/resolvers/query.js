@@ -1,33 +1,23 @@
-// const graphqlFields = require("graphql-fields");
-
-// function determineQueriesProjectFields(info) {
-//   const fields = graphqlFields(info, {}, { processArguments: true });
-
-//   return {
-//     withCategory: !!fields.category,
-//     withTasks: !!fields.tasks,
-//     withTask: fields.task
-//       ? { id: fields.task.__arguments[0].id.value }
-//       : undefined
-//   };
-// }
-
-module.exports = {
+const db = require("../db/db");
+const userService = require("../db/userservice");
+const Query = {
   ping: () => `Hello, World @ ${new Date().toLocaleTimeString()}`,
-  users: async (_s, _a, { dataSources }) => {
-    return dataSources.userDataSource.listAllUsers();
+  users: () => {
+    return userService.listAllUsers();
   },
-  user: async (_s, { id }, { dataSources }) => {
+  user: (_s, { id }) => {
     // here we can be sure that id is not null, as it's defined
     // as a mandatory field in the graphql schema
-    return dataSources.userDataSource.getUser(id);
+    return userService.getUser(id);
   },
 
-  projects: async (_s, _a, { dataSources }, info) => {
-    return dataSources.projectDatasource.getAllProjects();
+  projects: () => {
+    return db.getAllProjects();
   },
 
-  project: async (_s, { id }, { dataSources }, info) => {
-    return dataSources.projectDatasource.getProjectById(id);
+  project: async (_s, { id }) => {
+    return db.getProjectById(id);
   },
 };
+
+module.exports = Query;

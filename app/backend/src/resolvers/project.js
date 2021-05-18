@@ -1,20 +1,19 @@
+const db = require("../db/db");
+const userService = require("../db/userservice");
 module.exports = {
-  owner: async (project, _, { dataSources }) => {
+  owner: (project) => {
     // 1+n Problem when the query asks for more than one project 😱
     //     (more or less solved thx to the fact, that the userDataSource caches)
-    return dataSources.userDataSource.getUser(project._ownerId);
+    return userService.getUser(project._ownerId);
   },
-  category: async (project, _, { dataSources }) => {
-    if (project.category) {
-      console.log(`fyi: category on project '${project.id}' already loaded!`);
-      return project.category;
-    }
+
+  category: async (project) => {
     // 1+n problem for fetching categories 😱
-    return dataSources.projectDatasource.getCategoryById(project._categoryId);
+    return db.getCategoryById(project._categoryId);
   },
 
   tasks: async (project, _args, { dataSources }) => {
-    return dataSources.projectDatasource.getTasks(project.id);
+    return db.getTasks(project.id);
   },
 
   task: async (project, { id }, { dataSources }) => {
@@ -23,6 +22,6 @@ module.exports = {
     if (project.task && project.task.id === id) {
       return project.task;
     }
-    return dataSources.projectDatasource.getTaskById(id);
-  }
+    return db.getTaskById(id);
+  },
 };

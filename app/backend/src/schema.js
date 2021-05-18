@@ -1,4 +1,5 @@
-module.exports = `
+const { gql } = require("apollo-server");
+module.exports = gql`
   """
   A User describes an actor in the system
   """
@@ -65,7 +66,7 @@ module.exports = `
   }
 
   """
-  Projects are ground into user-defined categories
+  Projects are grouped into user-defined categories
   (like 'Private', 'Business', 'Hobby',...)
   """
   type Category {
@@ -123,7 +124,7 @@ module.exports = `
     """
     Return an unordered list of all projects
     """
-    projects: [Project!]! 
+    projects: [Project!]!
 
     project(id: ID!): Project
   }
@@ -132,7 +133,8 @@ module.exports = `
     title: String!
     description: String!
 
-    """ The date when this task should be finished.
+    """
+     The date when this task should be finished.
 
     If the date is not specified, it's automatically set to
     14 days from now
@@ -140,6 +142,17 @@ module.exports = `
     toBeFinishedAt: String
     assigneeId: ID!
   }
+
+  type AddTaskSuccess {
+    newTask: Task!
+  }
+
+  type AddTaskFailure {
+    errorMessage: String!
+    errorCode: Int!
+  }
+
+  # union AddTaskResponse   AddTaskSuccess | AddTaskFailure
 
   type Mutation {
     """
@@ -152,10 +165,5 @@ module.exports = `
     Change the state of the specified task
     """
     updateTaskState(taskId: ID!, newState: TaskState!): Task!
-  }
-
-  type Subscription {
-    onNewTask(projectId: ID): Task!
-    onTaskChange(projectId: ID): Task!
   }
 `;

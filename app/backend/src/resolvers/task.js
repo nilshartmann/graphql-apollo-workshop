@@ -1,5 +1,7 @@
+const userService = require("../db/userservice");
+
 module.exports = {
-  assignee: async (task, _, { dataSources }) => {
-    return dataSources.userDataSource.getUser(task._assigneeId);
-  }
+  assignee: (task) => {
+    return userService.getUser(task._assigneeId);
+  },
 };

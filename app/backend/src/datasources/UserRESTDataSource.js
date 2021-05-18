@@ -7,19 +7,23 @@ class UserRESTDataSource extends RESTDataSource {
   }
 
   listAllUsers() {
-    console.log(`READING ALL USERS FROM '${this.baseURL}'`);
+    console.log(
+      `[UserRESTDataSource::listAllUsers] READING ALL USERS FROM '${this.baseURL}'`
+    );
     return this.get(`users`);
   }
 
   getUser(id) {
-    console.log(`READING USER WITH ID '${id}' FROM '${this.baseURL}'`);
+    console.log(
+      `[UserRESTDataSource::getUser] READING USER WITH ID '${id}' FROM '${this.baseURL}'`
+    );
     // this method is invoked each time a user is requested
     // BUT: the actual remote call to the REST service might not be done
     //      due to cache-headers received from a previous call
     //      https://stackoverflow.com/a/53362001/6134498
 
     return this.get(`users/${id}`) //
-      .catch(err => {
+      .catch((err) => {
         if (getStatusCode(err) === 404) {
           return null;
         }
