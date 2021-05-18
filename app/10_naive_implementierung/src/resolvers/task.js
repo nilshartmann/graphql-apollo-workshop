@@ -1,7 +1,7 @@
 const userService = require("../domain/userservice");
 
 const TaskResolver = {
-  assignee: (task) => {
+  assignee(task) {
     return userService.getUser(task._assigneeId);
   },
 };

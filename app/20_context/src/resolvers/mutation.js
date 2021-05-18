@@ -8,7 +8,7 @@ function inFourteenDays() {
 }
 
 const MutationResolver = {
-  addTask: async (_s, { projectId, input }, { currentUser }) => {
+  async addTask(_s, { projectId, input }, { currentUser }) {
     input.toBeFinishedAt = input.toBeFinishedAt || inFourteenDays();
 
     const user = await userService.getUser(input.assigneeId);
@@ -31,7 +31,7 @@ const MutationResolver = {
     return newTask;
   },
 
-  updateTaskState: async (_s, { taskId, newState }) => {
+  async updateTaskState(_s, { taskId, newState }) {
     const updatedTasks = await db.updateTaskState(taskId, newState);
 
     return updatedTasks;
