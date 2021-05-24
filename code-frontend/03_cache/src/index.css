@@ -1,0 +1,466 @@
+:root {
+  --color-background: #ecf2f6;
+  --color-background-2: #f4f7fb;
+  --color-text: #3e475a;
+  --color-text-dim: #888b90;
+  --color-main: #2675be;
+  --color-white: #ffffff;
+
+  --font-text: Roboto, Arial, sans-serif;
+  --font-medium: 500;
+}
+
+body,
+html {
+  font-family: var(--font-text);
+  color: var(--color-text);
+  background-color: white;
+  font-size: 14px;
+  height: 100%;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+*:focus {
+  outline: none;
+}
+
+#root {
+  height: 100%;
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: var(--font-medium);
+}
+
+table {
+  width: 100%;
+  border-spacing: 0;
+  margin-bottom: 2rem;
+}
+
+td {
+  line-height: 1;
+}
+
+thead tr {
+  height: 4rem;
+  background-color: var(--color-background-2);
+
+  /* background-color: var(--color
+  -background-2); */
+}
+
+thead th {
+  text-transform: uppercase;
+  font-weight: var(--font-medium);
+  padding-left: 2rem;
+
+  /* // https://jsfiddle.net/zinoui/3LfE2/
+        &:first-child {
+          border-radius: 10px 0 0 0;
+        }
+
+        &:last-child {
+          border-radius: 0 10px 0 0;
+        } */
+}
+
+tbody tr {
+  height: 4rem;
+  background-color: var(--color-background-2);
+
+  /* &:nth-child(odd) {
+        background-color: var(--color-white);
+      }
+
+      &:last-child {
+        td:first-child {
+          border-radius: 0 0 0 10px;
+        }
+
+        td:last-child {
+          border-radius: 0 0 10px 0;
+        }
+      } */
+}
+
+tbody td {
+  padding-left: 2rem;
+}
+
+.ProjectApp {
+  background-color: var(--color-background);
+  filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.4));
+
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 100%;
+}
+
+.ProjectApp > header,
+.ProjectApp > footer {
+  background: linear-gradient(to bottom, var(--color-main), #4b87be);
+  /* background-color: #bcddf9; */
+  border-bottom: 2px solid var(--color-main);
+  color: var(--color-white);
+  height: 4rem;
+  font-size: 1.25rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ProjectApp > header a,
+.ProjectApp .Footer a {
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.ProjectApp header a:hover,
+.ProjectApp .Footer a:hover {
+  text-decoration: underline;
+}
+
+.ProjectApp > header {
+  /* margin-bottom: 3rem; */
+  padding-left: 2rem;
+  margin-bottom: 1rem;
+}
+
+.ProjectApp > footer {
+  font-size: 1rem;
+  height: 2rem;
+  margin-top: 2rem;
+
+  align-items: center;
+}
+
+.ProjectApp .Layout {
+  display: flex;
+}
+
+.ProjectApp main {
+  flex: 2;
+  padding: 0 2rem;
+}
+
+.ProjectApp aside {
+  width: 30%;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  background-color: var(--color-background);
+  border-left: 2px solid var(--color-background-2);
+}
+
+main header {
+  padding: 0 0rem 1rem 0rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--color-white);
+  display: flex;
+  justify-content: space-between;
+}
+
+main header a {
+  color: var(--color-text);
+}
+/* 
+.TaskListPage header {
+  padding-left: 1rem;
+  margin-bottom: 0;
+}
+.TaskListPage header h1 {
+  margin-left: 3rem;
+}
+
+.TaskListPage header h1 a {
+  color: var(--color-white);
+  text-decoration: none;
+}
+.TaskListPage header h1 a:hover {
+  text-decoration: underline;
+} */
+
+.TaskListPage .ButtonBar {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 3.5rem;
+  margin-bottom: 3rem;
+}
+
+.TaskStateCardboard {
+  margin-bottom: 3rem;
+}
+
+.Cardboard {
+  display: flex;
+  justify-content: space-between;
+}
+.Cardboard > * {
+  margin-right: 2rem;
+}
+.Cardboard > :last-child {
+  margin-right: 0;
+}
+
+.Card {
+  background-color: var(--color-white);
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.161);
+
+  flex: 1;
+}
+.Card .CardLabel {
+  color: var(--color-text-dim);
+}
+.Card .CardTitle {
+  font-size: 1.5rem;
+}
+
+.Card .ButtonBar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.Card .ButtonBar .Button {
+  margin-right: 2rem;
+}
+
+.Card .ButtonBar.left {
+  justify-content: flex-start;
+}
+
+.Card .ButtonBar .Button {
+  margin-right: 1rem;
+}
+
+.Button {
+  background-color: var(--color-main);
+  color: var(--color-background);
+  border: none;
+  border-radius: 50px;
+  height: 2.5rem;
+  padding: 0.5rem 1rem;
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.161);
+}
+.Button:hover {
+  background-color: #5c9dd9;
+}
+
+.Button.secondary {
+  background-color: var(--color-background);
+  color: var(--color-main);
+  border: 1px solid var(--color-main);
+}
+
+.Button.tertiary {
+  height: unset;
+  padding: 0.2rem 0.5rem;
+  border-radius: 10px;
+  margin: 0;
+  background-color: var(--color-background);
+  color: var(--color-main);
+  border: 1px solid var(--color-main);
+  box-shadow: none;
+}
+.Button.tertiary:hover {
+  background-color: #5c9dd9;
+}
+
+.Button:disabled {
+  background-color: var(--color-background-2);
+  color: var(--color-main);
+}
+.TaskListSidebar header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid var(--color-white);
+}
+
+.TaskListSidebar h2 {
+  font-size: 1rem;
+  font-weight: normal;
+  color: var(--color-text);
+}
+
+.TaskListSidebar .Task {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
+
+.TaskListSidebar a {
+  color: var(--color-text);
+}
+
+.TaskListSidebar .Task.Active {
+  margin-bottom: 1rem;
+  border: 1px solid var(--color-white);
+  background-color: var(--color-background-2);
+  border-radius: 10px;
+  padding: 0.5rem;
+}
+
+.QuickAddTaskForm {
+  /* border: 1px solid var(--color-white); */
+  background-color: var(--color-background-2);
+  padding: 1rem;
+  margin: 3rem 0;
+}
+.QuickAddTaskForm .Form {
+  display: flex;
+  align-items: flex-end;
+}
+
+.QuickAddTaskForm label {
+  flex: 1;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.QuickAddTaskForm input {
+  display: block;
+  width: 100%;
+}
+
+.QuickAddTaskForm .Button {
+  height: max-content;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.QuickAddTaskForm .Msg {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #516d41;
+}
+
+.AddTaskForm,
+.AddTaskForm input,
+.AddTaskForm textarea,
+.AddTaskForm select,
+.AddTaskForm label {
+  width: 100%;
+}
+.AddTaskForm input,
+.AddTaskForm textarea,
+.AddTaskForm select {
+  width: 100%;
+  border: 0;
+  background-color: var(--color-white);
+  border-radius: 5px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+
+  color: var(--color-text);
+  margin-bottom: 2rem;
+}
+
+.AddTaskForm textarea {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.AddTaskForm input,
+.AddTaskForm select {
+  height: 4rem;
+}
+
+.AddTaskForm .ButtonBar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+}
+
+.AddTaskForm .ButtonBar button {
+  margin-left: 1rem;
+}
+
+.LoadingIndicator .Spinner h1 {
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-text);
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* Spinner CSS taken from: http://tobiasahlin.com/spinkit/ */
+.LoadingIndicator .Spinner {
+  margin: auto 0;
+  width: 100%;
+  text-align: center;
+  padding: 0 2rem 1rem 2rem;
+}
+
+.LoadingIndicator .Spinner h1 {
+  font-size: 1.5rem;
+}
+
+.LoadingIndicator .Spinner > .bounce {
+  width: 1.2em;
+  height: 1.2em;
+  margin-right: 1.2em;
+  background-color: var(--color-main);
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.LoadingIndicator .Spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.LoadingIndicator .Spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0);
+  }
+
+  40% {
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes sk-bouncedelay {
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+
+  40% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}

@@ -29,10 +29,13 @@ export default function TaskListPage() {
   const history = useHistory();
 
   const { loading, error, data } = useQuery(TaskListPageQuery, {
+    // Immer wenn TaskListPage gerendert wird, erst Ergebnis aus Cache anzeigen,
+    // aber auch Server Request machen
+    fetchPolicy: "cache-and-network",
     variables: { projectId },
   });
 
-  if (loading) {
+  if (loading && !data) {
     return <LoadingIndicator>Loading Tasks...</LoadingIndicator>;
   }
   if (error) {
@@ -50,10 +53,10 @@ export default function TaskListPage() {
           <Link to="/">All Projects</Link> &gt; {data.project.title} Tasks
         </h1>
       </header>
-      {/* <QuickAddTaskForm
+      <QuickAddTaskForm
         projectId={projectId}
         assigneeId={data.project.owner.id}
-      /> */}
+      />
       <TasksTable projectId={projectId} tasks={data.project.tasks} />
       <div className="ButtonBar">
         <Button onClick={() => history.push(`/project/${projectId}/addtaks`)}>
@@ -127,7 +130,14 @@ function QuickAddTaskForm({ projectId, assigneeId }) {
   const [
     addTask,
     { loading: mutationRunning, error: addError, data: newTaskData, called },
-  ] = useMutation(QuickAddTaskMutation);
+  ] = useMutation(QuickAddTaskMutation, {
+    refetchQueries: [
+      {
+        query: TaskListPageQuery,
+        variables: { projectId },
+      },
+    ],
+  });
 
   async function handleAdd() {
     const result = await addTask({
