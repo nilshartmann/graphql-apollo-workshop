@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { gql } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { useParams } from "react-router";
 import { Card, InfoCard } from "../components";
 
@@ -38,6 +38,12 @@ const TaskDetailsPageQuery = gql`
 const UpdateTaskStateMutation = gql`
   mutation UpdateTaskStateMutation($taskId: ID!, $newState: TaskState!) {
     updateTaskState(taskId: $taskId, newState: $newState) {
+      # ÜBUNG 2, TODO 2:
+      #  Wenn deine Mutation funktioniert, und der Zustand
+      #  sich auf Button-Knopf-Druck ändert,
+      #  entferne hier das id-Feld.
+      #  Was passiert, wenn du den Button zum Starten/Stoppen des
+      #  Tasks nun drückst?
       id
       state
     }
@@ -62,6 +68,13 @@ export default function TaskDetailsPage() {
   //  - Wenn die geladenen Daten zur Verfügung stehen,
   //    soll das leere div unten gerendert werden, s. dort für noch mehr TODOs...
 
+  const { loading, error, data } = useQuery(TaskDetailsPageQuery, {
+    variables: {
+      projectId,
+      taskId,
+    },
+  });
+
   // -----------------------------------------------------------------------------------
   //  ÜBUNG 2
   //
@@ -82,9 +95,29 @@ export default function TaskDetailsPage() {
   //  - Was passiert, wenn Du das 'id'-Feld in der Rückgabe in UpdateTaskStateMutation
   //    entfernst?
 
+  const [addTask] = useMutation(UpdateTaskStateMutation);
+
+  function onTaskStateChange(newState) {
+    addTask({
+      variables: {
+        taskId,
+        newState,
+      },
+    });
+  }
+
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
+
+  if (error) {
+    return <h1>Error...</h1>;
+  }
+
   return (
     <div>
       <header>
+        <h1>{data.project.task.title}</h1>
         {/*
           
           ÜBUNG 1, TODO 2
@@ -98,6 +131,10 @@ export default function TaskDetailsPage() {
             funktioniert NOCH NICHT
           */}
       </header>
+      <TaskView
+        task={data.project.task}
+        onTaskStateChange={onTaskStateChange}
+      />
     </div>
   );
 }

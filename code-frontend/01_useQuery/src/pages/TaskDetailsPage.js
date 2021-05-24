@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { gql } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import { useParams } from "react-router";
 import { Card, InfoCard } from "../components";
 
@@ -62,6 +62,21 @@ export default function TaskDetailsPage() {
   //  - Wenn die geladenen Daten zur Verfügung stehen,
   //    soll das leere div unten gerendert werden, s. dort für noch mehr TODOs...
 
+  const { loading, error, data } = useQuery(TaskDetailsPageQuery, {
+    variables: {
+      projectId,
+      taskId,
+    },
+  });
+
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
+
+  if (error) {
+    return <h1>Error...</h1>;
+  }
+
   // -----------------------------------------------------------------------------------
   //  ÜBUNG 2
   //
@@ -85,6 +100,7 @@ export default function TaskDetailsPage() {
   return (
     <div>
       <header>
+        <h1>{data.project.task.title}</h1>
         {/*
           
           ÜBUNG 1, TODO 2
@@ -98,6 +114,7 @@ export default function TaskDetailsPage() {
             funktioniert NOCH NICHT
           */}
       </header>
+      <TaskView task={data.project.task} />
     </div>
   );
 }
