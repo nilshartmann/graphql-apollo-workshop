@@ -32,9 +32,6 @@ export default function App() {
             <Route exact path="/project/:projectId/addtaks">
               <AddTaskPage />
             </Route>
-            {/* <Route exact path={"/p"} component={ProjectsPageWithoutApollo} />
-          <Route exact path={"/project/:projectId/tasks/:taskId"} component={TaskPage} />
-          <Route exact path={""} component={AddTaskPage} /> */}
           </Switch>
         </main>
         <aside>
