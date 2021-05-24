@@ -42,7 +42,6 @@ h1 {
 
 table {
   width: 100%;
-  filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.161));
   border-spacing: 0;
   margin-bottom: 2rem;
 }
@@ -54,12 +53,15 @@ td {
 thead tr {
   height: 4rem;
   background-color: var(--color-background-2);
+
+  /* background-color: var(--color
+  -background-2); */
 }
 
 thead th {
-  padding-left: 3rem;
   text-transform: uppercase;
   font-weight: var(--font-medium);
+  padding-left: 2rem;
 
   /* // https://jsfiddle.net/zinoui/3LfE2/
         &:first-child {
@@ -91,25 +93,27 @@ tbody tr {
 }
 
 tbody td {
-  padding-left: 3rem;
+  padding-left: 2rem;
 }
 
 .ProjectApp {
   background-color: var(--color-background);
-  height: 100%;
+  filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.4));
+
   width: 100%;
-  max-width: 960px;
+  max-width: 1200px;
   margin: 0 auto;
 
-  min-height: 100%;
   display: grid;
   grid-template-rows: auto 1fr auto;
   grid-template-columns: 100%;
 }
 
-.ProjectApp header,
-.ProjectApp .Footer {
+.ProjectApp > header,
+.ProjectApp > footer {
   background: linear-gradient(to bottom, var(--color-main), #4b87be);
+  /* background-color: #bcddf9; */
+  border-bottom: 2px solid var(--color-main);
   color: var(--color-white);
   height: 4rem;
   font-size: 1.25rem;
@@ -119,7 +123,7 @@ tbody td {
   justify-content: center;
 }
 
-.ProjectApp header a,
+.ProjectApp > header a,
 .ProjectApp .Footer a {
   color: var(--color-white);
   text-decoration: none;
@@ -130,12 +134,13 @@ tbody td {
   text-decoration: underline;
 }
 
-.ProjectApp header {
-  margin-bottom: 3rem;
-  padding-left: 4rem;
+.ProjectApp > header {
+  /* margin-bottom: 3rem; */
+  padding-left: 2rem;
+  margin-bottom: 1rem;
 }
 
-.ProjectApp .Footer {
+.ProjectApp > footer {
   font-size: 1rem;
   height: 2rem;
   margin-top: 2rem;
@@ -143,23 +148,35 @@ tbody td {
   align-items: center;
 }
 
+.ProjectApp .Layout {
+  display: flex;
+}
+
 .ProjectApp main {
-  padding-left: 4rem;
-  padding-right: 4rem;
-
-  overflow-y: scroll;
+  flex: 2;
+  padding: 0 2rem;
 }
 
-.ProjectsPage header {
-  margin-bottom: 1rem;
-}
-.ProjectListPage h1 {
-  margin-left: 3rem;
-}
-
-.TaskListPage {
+.ProjectApp aside {
+  width: 30%;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  background-color: var(--color-background);
+  border-left: 2px solid var(--color-background-2);
 }
 
+main header {
+  padding: 0 0rem 1rem 0rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--color-white);
+  display: flex;
+  justify-content: space-between;
+}
+
+main header a {
+  color: var(--color-text);
+}
+/* 
 .TaskListPage header {
   padding-left: 1rem;
   margin-bottom: 0;
@@ -174,25 +191,13 @@ tbody td {
 }
 .TaskListPage header h1 a:hover {
   text-decoration: underline;
-}
+} */
 
 .TaskListPage .ButtonBar {
   display: flex;
   justify-content: flex-end;
   margin-right: 3.5rem;
-}
-
-.TaskPage header {
-  margin-bottom: 1rem;
-}
-
-.TaskPage header a {
-  color: var(--color-white);
-  text-decoration: none;
-}
-
-.TaskPage header a:hover {
-  text-decoration: underline;
+  margin-bottom: 3rem;
 }
 
 .TaskStateCardboard {
@@ -226,20 +231,20 @@ tbody td {
   font-size: 1.5rem;
 }
 
-.InfoCard .ButtonBar {
+.Card .ButtonBar {
   display: flex;
   justify-content: flex-end;
 }
 
-.InfoCard .ButtonBar button {
-  margin-left: 2rem;
+.Card .ButtonBar .Button {
+  margin-right: 2rem;
 }
 
-.InfoCard .ButtonBar.left {
+.Card .ButtonBar.left {
   justify-content: flex-start;
 }
 
-.InfoCard .ButtonBar .Button {
+.Card .ButtonBar .Button {
   margin-right: 1rem;
 }
 
@@ -283,4 +288,179 @@ tbody td {
 .Button:disabled {
   background-color: var(--color-background-2);
   color: var(--color-main);
+}
+.TaskListSidebar header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid var(--color-white);
+}
+
+.TaskListSidebar h2 {
+  font-size: 1rem;
+  font-weight: normal;
+  color: var(--color-text);
+}
+
+.TaskListSidebar .Task {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
+
+.TaskListSidebar a {
+  color: var(--color-text);
+}
+
+.TaskListSidebar .Task.Active {
+  margin-bottom: 1rem;
+  border: 1px solid var(--color-white);
+  background-color: var(--color-background-2);
+  border-radius: 10px;
+  padding: 0.5rem;
+}
+
+.QuickAddTaskForm {
+  /* border: 1px solid var(--color-white); */
+  background-color: var(--color-background-2);
+  padding: 1rem;
+  margin: 3rem 0;
+}
+.QuickAddTaskForm .Form {
+  display: flex;
+  align-items: flex-end;
+}
+
+.QuickAddTaskForm label {
+  flex: 1;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.QuickAddTaskForm input {
+  display: block;
+  width: 100%;
+}
+
+.QuickAddTaskForm .Button {
+  height: max-content;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.QuickAddTaskForm .Msg {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #516d41;
+}
+
+.AddTaskForm,
+.AddTaskForm input,
+.AddTaskForm textarea,
+.AddTaskForm select,
+.AddTaskForm label {
+  width: 100%;
+}
+.AddTaskForm input,
+.AddTaskForm textarea,
+.AddTaskForm select {
+  width: 100%;
+  border: 0;
+  background-color: var(--color-white);
+  border-radius: 5px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+
+  color: var(--color-text);
+  margin-bottom: 2rem;
+}
+
+.AddTaskForm textarea {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.AddTaskForm input,
+.AddTaskForm select {
+  height: 4rem;
+}
+
+.AddTaskForm .ButtonBar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+}
+
+.AddTaskForm .ButtonBar button {
+  margin-left: 1rem;
+}
+
+.LoadingIndicator .Spinner h1 {
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-text);
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* Spinner CSS taken from: http://tobiasahlin.com/spinkit/ */
+.LoadingIndicator .Spinner {
+  margin: auto 0;
+  width: 100%;
+  text-align: center;
+  padding: 0 2rem 1rem 2rem;
+}
+
+.LoadingIndicator .Spinner h1 {
+  font-size: 1.5rem;
+}
+
+.LoadingIndicator .Spinner > .bounce {
+  width: 1.2em;
+  height: 1.2em;
+  margin-right: 1.2em;
+  background-color: var(--color-main);
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.LoadingIndicator .Spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.LoadingIndicator .Spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0);
+  }
+
+  40% {
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes sk-bouncedelay {
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+
+  40% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
 }

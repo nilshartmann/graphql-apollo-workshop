@@ -1,7 +1,7 @@
 import { useQuery, gql, useMutation } from "@apollo/client";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { Card, InfoCard } from "../components";
+import { Card, InfoCard, LoadingIndicator } from "../components";
 
 const TaskDetailsPageQuery = gql`
   query TaskDetailsPageQuery($projectId: ID!, $taskId: ID!) {
@@ -48,7 +48,7 @@ export default function TaskDetailsPage() {
   }
 
   if (loading) {
-    return <h2>Loading...</h2>;
+    return <LoadingIndicator>Loading Task</LoadingIndicator>;
   }
   if (error || !data) {
     return <h2>Sorry... Something failed while loading data </h2>;
@@ -67,7 +67,8 @@ export default function TaskDetailsPage() {
     <div className="TaskPage">
       <header>
         <h1>
-          {projectListLink} &gt; {titleLink} &gt; {data.project.task?.title}
+          {projectListLink} &gt; {titleLink} &gt; {data.project.task?.title} (
+          {data.project.task?.id})
         </h1>
       </header>
       {data.project.task ? (

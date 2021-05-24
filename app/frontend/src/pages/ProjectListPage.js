@@ -28,12 +28,12 @@ export default function ProjectListPage() {
   }
 
   return (
-    <div className="ProjectListPage">
+    <>
       <header>
         <h1>All Projects</h1>
       </header>
       <ProjectListTable projects={data.projects} />
-    </div>
+    </>
   );
 }
 

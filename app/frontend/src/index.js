@@ -11,13 +11,12 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+// Problems with StrictMode: https://github.com/apollographql/apollo-client/issues/6209
 ReactDOM.render(
-  <React.StrictMode>
-    <Router>
-      <ApolloProvider client={client}>
-        <App />
-      </ApolloProvider>
-    </Router>
-  </React.StrictMode>,
+  <Router>
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  </Router>,
   document.getElementById("root")
 );
