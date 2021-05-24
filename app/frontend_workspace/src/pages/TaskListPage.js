@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
@@ -29,7 +30,6 @@ export default function TaskListPage() {
   const history = useHistory();
 
   const { loading, error, data, refetch } = useQuery(TaskListPageQuery, {
-    //fetchPolicy: "cache-and-network",
     variables: { projectId },
   });
 
@@ -50,12 +50,12 @@ export default function TaskListPage() {
         <h1>
           <Link to="/">All Projects</Link> &gt; {data.project.title} Tasks
         </h1>
-        <Button onClick={() => refetch()}>Refresh</Button>
+        {/* <Button onClick={() => refetch()}>Refresh</Button> */}
       </header>
-      <QuickAddTaskForm
+      {/* <QuickAddTaskForm
         projectId={projectId}
         assigneeId={data.project.owner.id}
-      />
+      /> */}
       <TasksTable projectId={projectId} tasks={data.project.tasks} />
       <div className="ButtonBar">
         <Button onClick={() => history.push(`/project/${projectId}/addtaks`)}>

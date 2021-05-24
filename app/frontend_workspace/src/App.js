@@ -1,14 +1,17 @@
+/* eslint-disable */
 import { Switch, Route, Link } from "react-router-dom";
 import AddTaskPage from "./pages/AddTaskPage";
 import ProjectListPage from "./pages/ProjectListPage";
 import TaskDetailsPage from "./pages/TaskDetailsPage";
 import TaskListPage from "./pages/TaskListPage";
 import TaskListSidebar from "./pages/TaskListSidebar";
+import UserListPage from "./pages/UserListPage";
 
 function Header() {
   return (
     <header>
       <Link to={"/"}>Personal Project Planning</Link>
+      <Link to={"/users"}>User List</Link>
     </header>
   );
 }
@@ -32,13 +35,16 @@ export default function App() {
             <Route exact path="/project/:projectId/addtaks">
               <AddTaskPage />
             </Route>
+            <Route exact path="/users">
+              <UserListPage />
+            </Route>
           </Switch>
         </main>
-        <aside>
+        {/* <aside>
           <Route path={"/project/:projectId/(tasks)?/:taskId"}>
             <TaskListSidebar />
           </Route>
-        </aside>
+        </aside> */}
       </div>
       <footer>Apollo GraphQL Workshop</footer>
     </div>

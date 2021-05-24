@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { gql, useQuery } from "@apollo/client";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "../components";
@@ -35,7 +36,7 @@ export default function TaskListSidebar() {
     <div className="TaskListSidebar">
       <header>
         <h1>Tasks</h1>
-        <Button onClick={handleRefresh}>Refresh</Button>
+        {/* <Button onClick={handleRefresh}>Refresh</Button> */}
       </header>
       {data.project.tasks.map((task) => (
         <div

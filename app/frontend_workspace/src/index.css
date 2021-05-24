@@ -117,7 +117,16 @@ tbody td {
   color: var(--color-white);
   height: 4rem;
   font-size: 1.25rem;
+}
 
+.ProjectApp > header {
+  padding-right: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ProjectApp > footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
