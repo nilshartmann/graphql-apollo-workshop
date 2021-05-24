@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/server.js",
   "scripts": {
-    "start": "rm -f ../db.sqlite && nodemon --inspect src/server.js",
+    "start": "rm -f ./db.sqlite && nodemon --inspect src/server.js",
     "eslint": "eslint src/**"
   },
   "keywords": [],
