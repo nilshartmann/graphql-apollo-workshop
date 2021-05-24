@@ -6,43 +6,46 @@ import { Card, InfoCard } from "../components";
 
 // ÜBUNG 1  ------------------------------------------------------------------------
 //
-// - Hier siehst Du den fertigen Query, der ein Task eines Projektes lädt
-//    - Welche Variablen erwartet der Query? 🤔
-// - Implementiere das Ausführen des Queries in der Komponente unten (s. dort TODO 1 und TODO 2)
+// - Hier siehst Du einen fertigen Query, der ein Task eines Projektes lädt:
+// query TaskDetailsPageQuery {
+//   project(id: "P1") {
+//     id
+//     title
+//     task(id: "T1") {
+//       id
+//       title
+//       description
+//       assignee {
+//         name
+//       }
+//       toBeFinishedAt
+//       state
+//     }
+//   }
+// }
 
-const TaskDetailsPageQuery = gql`
-  query TaskDetailsPageQuery($projectId: ID!, $taskId: ID!) {
-    project(id: $projectId) {
-      id
-      title
-      task(id: $taskId) {
-        id
-        title
-        description
-        assignee {
-          name
-        }
-        toBeFinishedAt
-        state
-      }
-    }
-  }
-`;
+// - Schritt 1: ersetze die hart-codierten Werte in dem Query durch Variablen
+//    - Die Namen kannst Du dir selbst aussuchen, sie sind jeweils vom Typ "ID!"
+// - Schritt 2: Erzeuge hier mit der gql-Funktion ein Query-"Dokument",
+//      das deinen Query enthält
+//    - Die entsprechende Konstante sollte TaskDetailsPageQuery heißen
+// - Schritt 3: Implementiere die Komponente unten, so dass sie den Query
+//    ausführt. Siehe TODOs weiter unten
 
 // ÜBUNG 2 -------------------------------------------------------------------------------
 //
-// - Definiere die Mutation zum Aktualisieren des Task-States
-// - Die Mutation muss dabei zwei Parameter entgegen nehmen: welche?
-// - TODOs siehe unten
-//
-const UpdateTaskStateMutation = gql`
-  mutation UpdateTaskStateMutation($taskId: ID!, $newState: TaskState!) {
-    updateTaskState(taskId: $taskId, newState: $newState) {
-      id
-      state
-    }
-  }
-`;
+// - Analog zu Übung 1, erzeuge für diese Mutation einen Mutation-String mit
+//     zwei Variablen und erzeuge ein GraphQL-Dokument dafür
+//     Typen: TaskId = ID! newState = TaskState!
+// - Weitere TODOs zum Ausführen der Mutation siehe unten:
+
+// mutation UpdateTaskStateMutation {
+//   updateTaskState(taskId: "T1", newState: "RUNNING") {
+//     id
+//     state
+//   }
+// }
+
 export default function TaskDetailsPage() {
   const { projectId, taskId } = useParams();
 

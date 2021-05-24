@@ -29,7 +29,6 @@ export default function TaskListPage() {
   const history = useHistory();
 
   const { loading, error, data, refetch } = useQuery(TaskListPageQuery, {
-    //fetchPolicy: "cache-and-network",
     variables: { projectId },
   });
 
