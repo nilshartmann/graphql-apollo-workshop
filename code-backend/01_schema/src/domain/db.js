@@ -89,9 +89,10 @@ class Database {
 
   async getTasks(projectId) {
     const db = await this.db;
-    const rows = await db.all("SELECT * FROM tasks WHERE project_id = ?", [
-      projectId,
-    ]);
+    const rows = await db.all(
+      "SELECT * FROM tasks WHERE project_id = ? ORDER BY finish_date DESC",
+      [projectId]
+    );
 
     return rows.map((r) => taskFromRow(r, ""));
   }
