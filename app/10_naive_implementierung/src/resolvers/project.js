@@ -12,8 +12,12 @@ const ProjectResolver = {
     return db.getCategoryById(project._categoryId);
   },
 
-  tasks(project, _args) {
-    return db.getTasks(project.id);
+  async tasks(project, _args) {
+    const tasks = await db.getTasks(project.id);
+
+    return new Promise((res) => {
+      setTimeout(() => res(tasks), 1000);
+    });
   },
 
   task(_project, { id }) {

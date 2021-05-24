@@ -6,8 +6,11 @@ const RootQueryResolver = {
     return `Hello, World @ ${new Date().toLocaleTimeString()}`;
   },
 
-  users() {
-    return userService.listAllUsers();
+  async users() {
+    const users = await userService.listAllUsers();
+    return new Promise((res) => {
+      setTimeout(() => res(users), 1);
+    });
   },
 
   user(_s, { id }) {
