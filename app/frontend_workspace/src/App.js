@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { Switch, Route, Link } from "react-router-dom";
 import AddTaskPage from "./pages/AddTaskPage";
+import { AddUserPage } from "./pages/AddUserPage";
 import ProjectListPage from "./pages/ProjectListPage";
 import TaskDetailsPage from "./pages/TaskDetailsPage";
 import TaskListPage from "./pages/TaskListPage";
@@ -37,6 +38,9 @@ export default function App() {
             </Route>
             <Route exact path="/users">
               <UserListPage />
+            </Route>
+            <Route exact path="/users/add">
+              <AddUserPage />
             </Route>
           </Switch>
         </main>

@@ -1,3 +1,4 @@
+const { AddArgumentsAsVariables } = require("graphql-tools");
 const db = require("../domain/db");
 const userService = require("../domain/userservice");
 
@@ -25,6 +26,11 @@ const MutationResolver = {
     const updatedTasks = await db.updateTaskState(taskId, newState);
 
     return updatedTasks;
+  },
+
+  async addUser(_s, { login, name }) {
+    const newUser = await userService.addUser(login, name);
+    return newUser;
   },
 };
 

@@ -33,6 +33,19 @@ class UserService {
     const user = await response.json();
     return user;
   }
+
+  async addUser(login, name) {
+    const response = await fetch(`${this.baseURL}users`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ login, name }),
+    });
+
+    const newUser = await response.json();
+    return newUser;
+  }
 }
 
 const userService = new UserService();

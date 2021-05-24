@@ -1,6 +1,8 @@
 /* eslint-disable */
-import { gql, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "../components";
 
 export default function UserListPage() {
   const [selectedUserId, setSelectedUserId] = useState("");
@@ -21,6 +23,7 @@ export default function UserListPage() {
         <tbody></tbody>
       </table>
       {selectedUserId && <UserDetails userId={selectedUserId} />}
+      <Link to="/users/add">Add User</Link>
     </div>
   );
 }

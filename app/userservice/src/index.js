@@ -58,6 +58,23 @@ app.post("/auth", (req, res) => {
   return res.json(user);
 });
 
+app.post("/users", (req, res) => {
+  const { name, login } = req.body;
+  const id = `U${users.length + 1}`;
+
+  const newUser = {
+    name,
+    login,
+    id,
+  };
+
+  users.push(newUser);
+  ++usersRequestCounter;
+  const result = { ...newUser, requestId: usersRequestCounter };
+
+  return res.json(result);
+});
+
 app.listen(port, () => {
   console.log(`  📞    User API Server listening on port ${port}`);
   if (useCaching) {

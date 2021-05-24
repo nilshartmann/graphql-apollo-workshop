@@ -144,6 +144,11 @@ module.exports = gql`
     assigneeId: ID!
   }
 
+  type AddUserInput {
+    name: String!
+    login: String!
+  }
+
   type Mutation {
     """
     Create a new Task. Returns the task just created, populated with
@@ -155,5 +160,10 @@ module.exports = gql`
     Change the state of the specified task
     """
     updateTaskState(taskId: ID!, newState: TaskState!): Task!
+
+    """
+    Create new user for our system
+    """
+    addUser(name: String!, login: String!): User!
   }
 `;
