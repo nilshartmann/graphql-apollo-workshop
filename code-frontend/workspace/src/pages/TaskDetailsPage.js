@@ -8,10 +8,10 @@ import { Card, InfoCard } from "../components";
 //
 // - Hier siehst Du einen fertigen Query, der ein Task eines Projektes lädt:
 // query TaskDetailsPageQuery {
-//   project(id: "P1") {
+//   project(id: "1") {
 //     id
 //     title
-//     task(id: "T1") {
+//     task(id: "2002") {
 //       id
 //       title
 //       description
@@ -26,6 +26,7 @@ import { Card, InfoCard } from "../components";
 
 // - Schritt 1: ersetze die hart-codierten Werte in dem Query durch Variablen
 //    - Die Namen kannst Du dir selbst aussuchen, sie sind jeweils vom Typ "ID!"
+//    (Du kannst den "variablisierten" Query auch im Playground ausprobieren: http://localhost:4000)
 // - Schritt 2: Erzeuge hier mit der gql-Funktion ein Query-"Dokument",
 //      das deinen Query enthält
 //    - Die entsprechende Konstante sollte TaskDetailsPageQuery heißen
@@ -37,10 +38,12 @@ import { Card, InfoCard } from "../components";
 // - Analog zu Übung 1, erzeuge für diese Mutation einen Mutation-String mit
 //     zwei Variablen und erzeuge ein GraphQL-Dokument dafür
 //     Typen: TaskId = ID! newState = TaskState!
+//    (Du kannst die "variablisierte" Mutation auch im Playground ausprobieren: http://localhost:4000)
+
 // - Weitere TODOs zum Ausführen der Mutation siehe unten:
 
 // mutation UpdateTaskStateMutation {
-//   updateTaskState(taskId: "T1", newState: "RUNNING") {
+//   updateTaskState(taskId: "2002", newState: "RUNNING") {
 //     id
 //     state
 //   }
